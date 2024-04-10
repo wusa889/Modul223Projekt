@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1712742618562,
+      "tag": "0000_square_satana",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1712742854945,
+      "tag": "0001_misty_valeria_richards",
+      "breakpoints": true
+    }
+  ]
+}
