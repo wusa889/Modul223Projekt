@@ -76,7 +76,7 @@ export class User extends Base {
 
   //#region functions
   save(){
-    
+    const newUser = 
   }
 
   createPost(){
