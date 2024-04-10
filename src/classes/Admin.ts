@@ -4,16 +4,16 @@ import { User } from "./User";
 
 export class Admin extends Moderator{
 
-    constructor(user: User, username: string, password: string, email: string, firstname: string, lastname: string) {
-        super(user, username, password, email, firstname, lastname);
+    constructor(username: string, password: string, email: string, firstname: string, lastname: string) {
+        super(username, password, email, firstname, lastname);
         this._role = Role.admin;
     }
 
-    BanUser(user: User){
+    BanUser(user: number){
 
     }
 
-    UnbanUser(user: User){
+    UnbanUser(user: number){
         
     }
 }

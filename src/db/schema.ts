@@ -69,7 +69,7 @@ export const commentRelations = relations(comments, ({one}) => ({
 
 export const likes = pgTable('likes', {
     id:serial("id").primaryKey(),
-    type: boolean('type').notNull(),
+    type: integer('type').notNull(),
     userid: integer("user_id").notNull(),
     postid: integer("postid").notNull()
 })

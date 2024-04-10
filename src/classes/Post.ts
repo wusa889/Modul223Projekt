@@ -1,3 +1,4 @@
+import { eq } from "drizzle-orm";
 import { db } from "../db";
 import { posts } from "../db/schema";
 import { Base } from "./Base";
@@ -33,4 +34,20 @@ export class Post extends Base {
         }
       });
   }
+
+  static async getPost(postid: number) {
+    const result = await db.select().from(posts).where(eq(posts.id, postid));
+    return result;
+  }
+  static async getAllPosts() {
+    const result = await db.select().from(posts);
+    return result;
+  }
+  static async deletePost(postid: number){
+    const result = await db.delete(posts).where(eq(posts.id, postid))
+  }
+  static async editPost(postid: number, newContent: string){
+    const result = await db.update(posts).set({content: newContent}).where(eq(posts.id, postid))
+  }
+  
 }
