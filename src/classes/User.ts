@@ -1,3 +1,5 @@
+import { db } from "../db";
+import { users } from "../db/schema";
 import { Role } from "../enums/Role";
 import { Base } from "./Base";
 
@@ -62,8 +64,8 @@ export class User extends Base {
   //#endregion
 
   //#region Constructor
-  constructor(user: User, username: string, password: string, email: string, firstname: string, lastname: string) {
-    super(user);
+  constructor(username: string, password: string, email: string, firstname: string, lastname: string) {
+    super();
     this._username = username;
     this._password = password;
     this._email = email;
@@ -75,8 +77,16 @@ export class User extends Base {
   //#endregion
 
   //#region functions
-  save(){
-    const newUser = 
+  async save(){
+    await db.insert(users).values({
+      username: this.username,
+      password: this.password,
+      email: this.email,
+      firstname: this.firstname,
+      name: this.lastName,
+      role: this.role,
+      isBanned: this.isBanned,
+    }).execute()
   }
 
   createPost(){
