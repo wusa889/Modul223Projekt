@@ -1,25 +1,36 @@
+import { db } from "../db";
+import { posts } from "../db/schema";
 import { Base } from "./Base";
-import { User } from "./User";
 
-export class Post extends Base{
-    
-    private _content : string;
-    public get content() : string {
-        return this._content;
-    }
-    public set content(v : string) {
-        this._content = v;
-    }
-    
-    /**
-     *
-     */
-    constructor(user: User, content: string) {
-        super(user);
-        this._content = content;
-    }
+export class Post extends Base {
+  private _content: string;
+  public get content(): string {
+    return this._content;
+  }
+  public set content(v: string) {
+    this._content = v;
+  }
 
-    save(){
-        
-    }
+  /**
+   *
+   */
+  constructor(content: string) {
+    super();
+    this._content = content;
+  }
+
+  async save(userid: number) {
+    const newPost = await db
+      .insert(posts)
+      .values({
+        content: this.content,
+        userid: userid
+      })
+      .returning()
+      .then((res) => {
+        if (Array.isArray(res)) {
+          this.id = res[0].id;
+        }
+      });
+  }
 }

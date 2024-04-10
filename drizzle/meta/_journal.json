@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1712742618562,
-      "tag": "0000_square_satana",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1712742854945,
-      "tag": "0001_misty_valeria_richards",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1712760299969,
-      "tag": "0002_daily_ares",
+      "when": 1712778636824,
+      "tag": "0000_premium_vermin",
       "breakpoints": true
     }
   ]

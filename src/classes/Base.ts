@@ -16,6 +16,4 @@ export abstract class Base implements iBase {
   constructor() {
     this._id = null;
   }
-
-  
 }

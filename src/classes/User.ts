@@ -1,3 +1,4 @@
+import { eq } from "drizzle-orm";
 import { db } from "../db";
 import { users } from "../db/schema";
 import { Role } from "../enums/Role";
@@ -64,7 +65,13 @@ export class User extends Base {
   //#endregion
 
   //#region Constructor
-  constructor(username: string, password: string, email: string, firstname: string, lastname: string) {
+  constructor(
+    username: string,
+    password: string,
+    email: string,
+    firstname: string,
+    lastname: string
+  ) {
     super();
     this._username = username;
     this._password = password;
@@ -77,45 +84,59 @@ export class User extends Base {
   //#endregion
 
   //#region functions
-  async save(){
-    await db.insert(users).values({
-      username: this.username,
-      password: this.password,
-      email: this.email,
-      firstname: this.firstname,
-      name: this.lastName,
-      role: this.role,
-      isBanned: this.isBanned,
-    }).execute()
+  async save() {
+    const newUser = await db
+      .insert(users)
+      .values({
+        username: this.username,
+        password: this.password,
+        email: this.email,
+        firstname: this.firstname,
+        name: this.lastName,
+        role: this.role,
+        isBanned: this.isBanned,
+      })
+      .returning()
+      .then((res) => {
+        if (Array.isArray(res)) {
+          this.id = res[0].id;
+        }
+      });
   }
 
-  createPost(){
-
+  static async resetPassword(id: number, password: string){
+    if(password.length < 10){
+      console.log("password to short")
+      return;
+    }
+    const result = await db.update(users).set({password: password}).where(eq(users.id, id))
   }
 
-  createComment(){
-
+  static async getUser(id: number) {
+    const result = await db.select().from(users).where(eq(users.id, id));
+    return result;
+  }
+  static async getAllUsers() {
+    const result = await db.select().from(users);
+    return result;
+  }
+  static async deleteUser(id: number) {
+    const result = await db.delete(users).where(eq(users.id, id));
   }
 
-  giveLike(){
+  createPost() {}
 
-  }
+  createComment() {}
 
-  EditComment(){
+  giveLike() {}
 
-  }
+  EditComment() {}
 
-  EditPost(){
+  EditPost() {}
 
-  }
-  DeleteComment(){
+  DeleteComment() {}
 
-  }
-
-  DeletePost(){
-
-  }
-
+  DeletePost() {}
 
   //#endregion
 }
