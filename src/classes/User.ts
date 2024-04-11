@@ -124,19 +124,5 @@ export class User extends Base {
     const result = await db.delete(users).where(eq(users.id, id));
   }
 
-  createPost() {}
-
-  createComment() {}
-
-  giveLike() {}
-
-  EditComment() {}
-
-  EditPost() {}
-
-  DeleteComment() {}
-
-  DeletePost() {}
-
-  //#endregion
+    //#endregion
 }

@@ -1,5 +1,4 @@
 import { iBase } from "../interfaces/iBase";
-import { User } from "./User";
 
 export abstract class Base implements iBase {
   private _id: number | null;
