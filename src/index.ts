@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import { createUser, userLogin } from "./controller/userController"
-import { createPost } from "./controller/postController";
+import { createPost, deletePost, editPost } from "./controller/postController";
 
 const cors = require('cors')
 const path = require('path');
@@ -34,7 +34,11 @@ app.post('/register', createUser)
 
 app.post('/login', userLogin)
 
-app.post('/post/:id', createPost)
+app.post('/post', createPost)
+
+app.post('/post/:id', editPost)
+
+app.delete('/post/:id', deletePost)
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);

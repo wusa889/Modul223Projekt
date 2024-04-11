@@ -2,11 +2,65 @@ import { Request, Response } from "express";
 import { Post } from "../classes/Post";
 
 export const createPost = (req: Request, res: Response): void => {
-  if (req.body !== null) {
-    const id = Number(req.params.id);
+  let id: number;
+  if (req.headers !== null && req.body !== null) {
+    id = Number(req.headers.id)
     const { content } = req.body;
     const newPost = new Post(content);
-    newPost.save(id)
+    newPost.save(id);
     res.status(200).send(JSON.stringify(newPost));
   }
 };
+
+export const editPost = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const postid: number = Number(req.params.id);
+        let userid: number = Number(req.headers.id);
+        const { content } = req.body;
+
+        if (!userid || !postid || !content) {
+            res.status(400).send('Missing parameters');
+        }
+
+        const dbPost = await Post.getPost(postid);
+
+        if (dbPost[0] && dbPost[0].userid === userid) {
+            await Post.editPost(postid, content);
+            // Assuming editPost method doesn't return the updated post, you might not need to log/send it back.
+            res.status(200).send('Post updated successfully');
+        } else {
+            res.status(404).send('Post not found or user mismatch' + `user id: ${userid} postid ${postid} `);
+        }
+    } catch (error) {
+        console.error('Error updating post:', error);
+        res.status(500).send('Internal server error');
+    }
+};
+
+export const deletePost = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const postid: number = Number(req.params.id);
+        let userid: number = Number(req.headers.id);
+
+        if (!userid || !postid) {
+            res.status(400).send('Missing parameters');
+        }
+
+        const dbPost = await Post.getPost(postid);
+
+        if (dbPost[0] && dbPost[0].userid === userid) {
+            await Post.deletePost(postid);
+            // Assuming editPost method doesn't return the updated post, you might not need to log/send it back.
+            res.status(200).send('Post deleted successfully');
+        } else {
+            res.status(404).send('Post not found or user mismatch' + `user id: ${userid} postid ${postid} `);
+        }
+    } catch (error) {
+        console.error('Error updating post:', error);
+        res.status(500).send('Internal server error');
+    }
+};
+
+export const getAllPosts = async (req: Request, res: Response): Promise<void> => {
+    
+}
