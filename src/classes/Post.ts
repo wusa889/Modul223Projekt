@@ -36,9 +36,18 @@ export class Post extends Base {
   }
 
   static async getPost(postid: number) {
-    const result = await db.select().from(posts).where(eq(posts.id, postid));
+    //const result = await db.select().from(posts).where(eq(posts.id, postid));
+    const result = await db.query.posts.findMany({
+      with: {
+        userid: true,
+        comments: true,
+        likes: true,
+      },
+      where: (eq(posts.id, postid) )
+    })
     return result;
   }
+
   static async getAllPosts() {
     const resultq = db.query.posts.findMany({
       with: {

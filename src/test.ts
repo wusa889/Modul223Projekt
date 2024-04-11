@@ -5,25 +5,48 @@ import { Notification } from "./classes/Notification";
 import { Post } from "./classes/Post";
 import { User } from "./classes/User";
 import { db } from "./db";
-import { notifications, posts, users } from "./db/schema";
+import { comments, notifications, posts, users } from "./db/schema";
 
 
+
+// const resultComments = db.query.comments.findMany({
+//     with: {
+//       userid: true,
+//       postid: true
+//     },
+//     where: (eq(comments.postid, 1) )
+//   }).then((res) => {
+//     console.log(res)
+//     process.exit(0)
+//   })
 
 // const result = Post.getAllPosts().then((posts) => {
 //     console.log(posts)
 // })
 
+// const result44 = db.query.posts.findMany({
+//     with: {
+//       userid: true,
+//       comments: true,
+//       likes: true,
+//     },
+//     where: (eq(posts.id, 2) )
+//   }).then((res) => {
+//     console.log(res)
+//     process.exit(0)
+//   })
 
-const resultq = db.query.posts.findMany({
-    with: {
-        userid: true,
-        comments: true,
-        likes: true
-    }
-}).then(res => {
-    console.log(res)
-    process.exit(0)
-})
+
+// const resultq = db.query.posts.findMany({
+//     with: {
+//         userid: true,
+//         comments: true,
+//         likes: true
+//     }
+// }).then(res => {
+//     console.log(res)
+//     process.exit(0)
+// })
 
 // const token = {userid: 1}
 

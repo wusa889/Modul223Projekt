@@ -49,7 +49,13 @@ export class Comments extends Base {
   }
 
   static async getAllCommentsOfPost(postId: number) {
-    const result = await db.select().from(comments).where(eq(comments.postid, postId))
+    const result = await db.query.comments.findMany({
+      with: {
+        userid: true,
+        postid: true
+      },
+      where: (eq(comments.postid, postId) )
+    })
     return result;
   }
   

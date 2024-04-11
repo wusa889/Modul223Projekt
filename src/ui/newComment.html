@@ -54,19 +54,16 @@
   </header>
   <body>
     <div class="container">
-      <table id="tabelle" class="table table-striped table-hover">
-        <thead>
-          <tr id="theadders">
-            <th>ID</th>
-            <th>Post</th>
-            <th>User</th>
-            <th>Likes</th>
-          </tr>
-        </thead>
-        <tbody id="tbody"></tbody>
-      </table>
+        <form id="myform" method="post">
+            <div class="form-group">
+              <label for="CommentContent">Comment Content</label>
+              <input type="text" class="form-control" id="CommentContent" name="CommentContent" placeholder="Enter CommentContent">
+            </div>
+
+            <button type="submit" onclick="Create(event)" class="btn btn-primary">Create Comment</button>
+        </form>
     </div>
-    <script src="/index.js"></script>
+    <script src="/newComment.js"></script>
   </body>
 
   <footer>

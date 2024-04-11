@@ -90,6 +90,28 @@ async function main() {
     ]).returning()
 
   }
+
+  const mod = await db.insert(users).values({
+    username: `mod`,
+    password: `modpw123`,
+    email: `email@email.com`,
+    name: `namemod`,
+    firstname: `firstnamemod`,
+    role: 2,
+    isBanned: false
+  }).returning()
+
+  const admin = await db.insert(users).values({
+    username: `admin`,
+    password: `admin123`,
+    email: `email@email.com`,
+    name: `adminname`,
+    firstname: `firstnameadmin`,
+    role: 3,
+    isBanned: false
+  }).returning()
+
+
   console.log("Seeding Done")
   process.exit(0)
 }

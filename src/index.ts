@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import { createUser, userLogin } from "./controller/userController"
-import { createPost, deletePost, editPost, getAllPosts } from "./controller/postController";
+import { createPost, deletePost, editPost, getAllPosts, getPostById } from "./controller/postController";
 import { createComment, deleteComment, editComment, getAllCommentsByPost } from "./controller/commentController";
 
 const cors = require('cors')
@@ -37,8 +37,13 @@ app.get('/allpost', getAllPosts)
 app.get('/allComments/:id', getAllCommentsByPost)
 
 app.get('/post/:id', (req: Request, res: Response) => {
-  res.send(`on post page ${req.params.id}`)
+  res.sendFile(path.join(__dirname, 'ui', 'postdetail.html'))
 })
+app.get('/post/:id/comment', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, 'ui', 'newComment.html'))
+})
+
+app.get('/postbyid/:id', getPostById)
 
 app.post('/register', createUser)
 
