@@ -27,6 +27,5 @@ export const userLogin = (req: Request, res: Response): void => {
             res.send(JSON.stringify(user[0]))
         }
     })
-
 }
 

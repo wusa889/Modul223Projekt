@@ -1,16 +1,20 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import { createUser, userLogin } from "./controller/userController"
+import { createPost } from "./controller/postController";
+
+const cors = require('cors')
 const path = require('path');
 dotenv.config();
 
+
 const app: Express = express();
 const port = process.env.PORT || 3000;
-
+app.use(cors())
 app.use(express.json())
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
+  res.sendFile(path.join(__dirname, 'ui', 'index.html'))
 });
 
 app.get("/login", (req: Request, res: Response) =>  {
@@ -21,6 +25,7 @@ app.get('/register', (req: Request, res: Response) => {
   res.send("registerpage")
 })
 
+
 app.get('/post/:id', (req: Request, res: Response) => {
   res.send(`on post page ${req.params.id}`)
 })
@@ -28,6 +33,8 @@ app.get('/post/:id', (req: Request, res: Response) => {
 app.post('/register', createUser)
 
 app.post('/login', userLogin)
+
+app.post('/post/:id', createPost)
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);

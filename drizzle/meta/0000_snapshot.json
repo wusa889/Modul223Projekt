@@ -1,5 +1,5 @@
 {
-  "id": "3d785dba-2223-4ed2-ae45-44c24240d85b",
+  "id": "1cfadee6-83d6-4803-8bc9-7cac52d34d53",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -50,7 +50,7 @@
         },
         "type": {
           "name": "type",
-          "type": "boolean",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },

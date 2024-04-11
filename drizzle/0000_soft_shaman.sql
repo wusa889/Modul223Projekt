@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS "comments" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "likes" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"type" boolean NOT NULL,
+	"type" integer NOT NULL,
 	"user_id" integer NOT NULL,
 	"postid" integer NOT NULL
 );
