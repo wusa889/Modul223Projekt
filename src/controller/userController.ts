@@ -21,7 +21,7 @@ export const userLogin = (req: Request, res: Response): void => {
     db.select().from(users).where(eq(users.username, username)).then((user) => {
         let myUser = user[0];
         if(myUser.username === username && myUser.password === password){
-            res.status(200).send(JSON.stringify({'allesgut':'hatklappert'}))
+            res.status(200).send(JSON.stringify({id: myUser.id, role: myUser.role}))
         }
         else{
             res.send(JSON.stringify(user[0]))

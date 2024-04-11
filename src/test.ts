@@ -9,10 +9,21 @@ import { notifications, posts, users } from "./db/schema";
 
 
 
-const result = Post.getAllPosts().then((posts) => {
-    console.log(posts)
-})
+// const result = Post.getAllPosts().then((posts) => {
+//     console.log(posts)
+// })
 
+
+const resultq = db.query.posts.findMany({
+    with: {
+        userid: true,
+        comments: true,
+        likes: true
+    }
+}).then(res => {
+    console.log(res)
+    process.exit(0)
+})
 
 // const token = {userid: 1}
 
@@ -36,14 +47,14 @@ const result = Post.getAllPosts().then((posts) => {
 // const newpost = new Post("Ich bin ein Post und bin cool")
 // newpost.save(token.userid)
 
-const result3 = db.query.users.findFirst({
-    with: {
-        likes: true,
-        comments: true,
-        posts: true,
-        notifications: true,
-    },
-}).then(res =>{
-    console.log(res)
-    process.exit(0)
-})
+// const result3 = db.query.users.findFirst({
+//     with: {
+//         likes: true,
+//         comments: true,
+//         posts: true,
+//         notifications: true,
+//     },
+// }).then(res =>{
+//     console.log(res)
+//     process.exit(0)
+// })

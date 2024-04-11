@@ -17,15 +17,19 @@ app.use(express.json())
 app.use(express.static(path.join(__dirname, 'ui')));
 
 app.get("/", (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, 'ui', 'index.html'))
+  res.sendFile(path.join(__dirname, 'ui', 'index.html')) // ok
 });
 
 app.get("/login", (req: Request, res: Response) =>  {
-  res.send("loginpage")
+  res.sendFile(path.join(__dirname, 'ui', 'login.html'))
 });
 
 app.get('/register', (req: Request, res: Response) => {
-  res.send("registerpage")
+  res.sendFile(path.join(__dirname, 'ui', 'register.html'))
+})
+
+app.get('/post', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, 'ui', 'newPost.html'))
 })
 
 app.get('/allpost', getAllPosts)
