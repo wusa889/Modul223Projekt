@@ -26,7 +26,7 @@ const result = Post.getAllPosts().then((posts) => {
 // newAdmin.save();
 // newnotification.save();
 
-// const result = db.select()
+// const result2 = db.select()
 // .from(users)
 // .leftJoin(notifications, eq(users.id, notifications.fkSentTo))
 // .where(eq(users.id, 10)).then((res) =>{
@@ -36,14 +36,14 @@ const result = Post.getAllPosts().then((posts) => {
 // const newpost = new Post("Ich bin ein Post und bin cool")
 // newpost.save(token.userid)
 
-// const result = db.query.users.findFirst({
-//     with: {
-//         likes: true,
-//         comments: true,
-//         posts: true,
-//         notifications: true,
-//     },
-// }).then(res =>{
-//     console.log(res)
-//     process.exit(0)
-// })
+const result3 = db.query.users.findFirst({
+    with: {
+        likes: true,
+        comments: true,
+        posts: true,
+        notifications: true,
+    },
+}).then(res =>{
+    console.log(res)
+    process.exit(0)
+})
