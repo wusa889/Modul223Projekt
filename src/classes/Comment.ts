@@ -42,5 +42,15 @@ export class Comments extends Base {
     const result = await db.update(comments).set({content: newContent}).where(eq(comments.id, commentId));
     return result;
   }
+
+  static async getComment(commentId: number) {
+    const result = await db.select().from(comments).where(eq(comments.id, commentId));
+    return result;
+  }
+
+  static async getAllCommentsOfPost(postId: number) {
+    const result = await db.select().from(comments).where(eq(comments.postid, postId))
+    return result;
+  }
   
 }

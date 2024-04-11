@@ -62,5 +62,6 @@ export const deletePost = async (req: Request, res: Response): Promise<void> => 
 };
 
 export const getAllPosts = async (req: Request, res: Response): Promise<void> => {
-    
+    const posts =  await Post.getAllPosts();
+    res.status(200).send(JSON.stringify(posts))
 }
