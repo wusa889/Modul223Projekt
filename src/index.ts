@@ -29,7 +29,7 @@ app.get('/register', (req: Request, res: Response) => {
 })
 
 app.get('/post', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, 'ui', 'newPost.html'))
+  res.sendFile(path.join(__dirname, 'ui', 'newpost.html'))
 })
 
 app.get('/allpost', getAllPosts)
