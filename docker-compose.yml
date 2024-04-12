@@ -6,8 +6,7 @@ services:
     volumes:
       - ./data/db:/var/lib/postgresql/data
     ports:
-      - 9000:5432
-
+      - "9000:5432"
     environment:
       - POSTGRES_DB=twitterClone
       - POSTGRES_USER=postgres
@@ -17,4 +16,22 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - "8080:8080"
+
+  app:
+    image: wusa889/twitterclone-app:latest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/twitterClone
+    command: >
+      sh -c "
+      sleep 10 &&
+      npm install &&
+      npm run migration:generate &&
+      npm run migration:push &&
+      npm run db:seed &&
+      npx ts-node ./src/index.ts
+      "
